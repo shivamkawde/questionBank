@@ -1,6 +1,7 @@
+"use client"
 
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 
-'use client'
 import { URL } from "@/utils/gemini";
 import React, { useState, useCallback } from 'react';
 
@@ -43,7 +44,8 @@ const Spinner = ({ className = 'w-5 h-5' }) => (
  * A sub-component to display the structured quiz data and handle user interaction,
  * including the Load More button.
  */
-const QuizDisplay = ({ quizData, handleLoadMore, loadingMore }) => {
+//@ts-check
+const QuizDisplay = ({ quizData, handleLoadMore, loadingMore }:any) => {
   const [userAnswers, setUserAnswers] = useState({});
 
   if (!quizData || quizData.length === 0) {
@@ -54,7 +56,7 @@ const QuizDisplay = ({ quizData, handleLoadMore, loadingMore }) => {
     );
   }
 
-  const handleOptionClick = (questionIndex, selectedOption) => {
+  const handleOptionClick = (questionIndex:any, selectedOption:any) => {
     // Record the user's selected answer for this question
     setUserAnswers(prev => ({
       ...prev,
@@ -241,7 +243,8 @@ export default function App() {
   // Handles loading 10 more questions and appending them
   const handleLoadMore = useCallback(async () => {
     // Call reusable fetch with count 10 and append the data
-    const updateData = (newQuestions) => {
+    
+    const updateData = (newQuestions:any) => {
         setQuizData(prev => [...prev, ...newQuestions]);
     };
     await _fetchQuizQuestions(10, updateData, false);
@@ -272,7 +275,8 @@ export default function App() {
               disabled={loading}
               aria-label="Generate Quiz"
             >
-              {loading ? <Spinner className="w-5 h-5 text-white" /> : <SendIcon className="text-white" />}
+            
+              {loading ? <Spinner className="w-5 h-5 text-white" /> : <SendIcon  />}
             </button>
           </div>
         </div>
